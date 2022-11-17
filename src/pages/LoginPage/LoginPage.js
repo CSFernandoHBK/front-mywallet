@@ -90,4 +90,12 @@ const Container = styled.div`
         }
         
     }
+
+    p{
+        font-family: 'Raleway', sans-serif;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 18px;
+        color: #FFFFFF;
+    }
 `

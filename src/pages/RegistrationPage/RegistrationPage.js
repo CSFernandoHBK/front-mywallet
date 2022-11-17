@@ -48,7 +48,7 @@ export default function RegistrationPage() {
                 >Cadastrar</button>
             </form>
             <Link to={"/"}>
-                <p>Já possuí uma conta? Entre</p>
+                <p>Já tem uma conta? Entre agora!</p>
             </Link>
         </Container>
     )
