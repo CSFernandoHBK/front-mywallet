@@ -1,6 +1,8 @@
+import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components"
+import { urlAPI } from "../../constants/URLs";
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
@@ -11,6 +13,13 @@ export default function LoginPage() {
     function sendLogin(event){
         event.preventDefault();
         setDisabled(true);
+
+        const requisicao = axios.post(`${urlAPI}login`, {
+            "email": email,
+            "password": password 
+        })
+        requisicao.then(() => navigate("/home"));
+        requisicao.catch(() => {alert("Email ou senha incorretos!");setDisabled(false)});
     }
 
     return(

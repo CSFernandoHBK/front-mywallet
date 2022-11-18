@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { urlAPI } from "../../constants/URLs";
 
 export default function RegistrationPage() {
     const [nome, setNome] = useState("");
@@ -11,8 +12,20 @@ export default function RegistrationPage() {
     const navigate = useNavigate();
     const [disabled, setDisabled] = useState(false);
 
-    function sendRegister(){
-
+    function sendRegister(event){
+        event.preventDefault();
+        setDisabled(true);
+        if(senha !== senhaConf){
+            setDisabled(false);
+            return(alert("As senhas precisam ser iguais!"))
+        }
+        const requisicao = axios.post(`${urlAPI}register`,{
+            "name": nome,
+            "password": senha,
+            "email": email
+        })
+        requisicao.then(() => {alert("Conta criada com sucesso!");navigate("/")});
+        requisicao.catch(() => {alert("Este email já está cadastrado!");setDisabled(false)});
     }
 
     return(
