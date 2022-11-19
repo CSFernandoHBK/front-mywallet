@@ -6,11 +6,13 @@ import AreaFinancas from "./AreaFinancas"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { urlAPI } from "../../constants/URLs";
+import { Link, useNavigate } from "react-router-dom"
 
 
 export default function HomePage() {
     const token = JSON.parse(localStorage.getItem("token"));
     const [infoUser, setInfoUser] = useState();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const requisicao = axios.get(`${urlAPI}home`, 
@@ -19,6 +21,14 @@ export default function HomePage() {
         }})
         requisicao.then((res) => {setInfoUser(res.data)})
     }, [])
+
+    if(!infoUser){
+        return(
+            <Container>
+                <h1>Carregando...</h1>
+            </Container>
+        )
+    }
 
     console.log(infoUser);
 
@@ -31,13 +41,17 @@ export default function HomePage() {
             <AreaFinancas/>
             <div>
                 <BotaoInferior>
-                    <img src={plusIcon}/>
-                    <p>Nova <br/> entrada</p>
+                    <Link to="/newmovement/in">
+                        <img src={plusIcon}/>
+                        <p>Nova <br/> entrada</p>
+                    </Link>
                 </BotaoInferior>
                 <BotaoInferior>
-                    <img src={minusIcon}/>
-                    <p>Nova <br/> saída</p>
-                </BotaoInferior>
+                    <Link to="/newmovement/out">
+                        <img src={minusIcon}/>
+                        <p>Nova <br/> saída</p>
+                    </Link>
+                </BotaoInferior>                
             </div>
             
         </Container>

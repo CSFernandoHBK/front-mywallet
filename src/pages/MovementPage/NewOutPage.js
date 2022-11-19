@@ -1,14 +1,14 @@
 import { useState } from "react"
 import styled from "styled-components"
 
-export default function NewInPage() {
+export default function NewOutPage() {
     const [valor, setValor] = useState()
     const [descricao, setDescricao] = useState();
     const [disabled, setDisabled] = useState(false);
 
     return(
         <Container>
-            <h1>Nova entrada</h1>
+            <h1>Nova saída</h1>
             <form>
                 <input type="number" 
                 value={valor} 
@@ -22,7 +22,7 @@ export default function NewInPage() {
                 placeholder="Descrição" 
                 disabled={disabled} 
                 required />
-                <button>Salvar entrada</button>
+                <button>Salvar saída</button>
             </form>
         </Container>
     )
@@ -39,7 +39,7 @@ const Container = styled.div`
     align-items: flex-start;
 
     h1{
-        font-family: 'Raleway';
+        font-family: 'Raleway', sans-serif;
         font-style: normal;
         font-weight: 700;
         font-size: 26px;
