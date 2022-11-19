@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { json, Link, useNavigate } from "react-router-dom";
 import styled from "styled-components"
 import { urlAPI } from "../../constants/URLs";
 
@@ -18,8 +18,13 @@ export default function LoginPage() {
             "email": email,
             "password": password 
         })
-        requisicao.then(() => navigate("/home"));
+        requisicao.then((res) => {responseProcess(res.data.token)});
         requisicao.catch(() => {alert("Email ou senha incorretos!");setDisabled(false)});
+    }
+
+    function responseProcess(res){
+        localStorage.setItem("token", JSON.stringify(res));
+        navigate("/home");
     }
 
     return(

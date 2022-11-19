@@ -2,19 +2,33 @@ import styled from "styled-components"
 import logoutIcon from "../../assets/images/logoutIcon.png"
 import minusIcon from "../../assets/images/minusIcon.png"
 import plusIcon from "../../assets/images/plusIcon.png"
+import AreaFinancas from "./AreaFinancas"
+import axios from "axios"
+import { useEffect, useState } from "react"
+import { urlAPI } from "../../constants/URLs";
 
 
 export default function HomePage() {
-    
+    const token = JSON.parse(localStorage.getItem("token"));
+    const [infoUser, setInfoUser] = useState();
+
+    useEffect(() => {
+        const requisicao = axios.get(`${urlAPI}home`, 
+        {headers: {
+            "Authorization": `Bearer ${token}`
+        }})
+        requisicao.then((res) => {setInfoUser(res.data)})
+    }, [])
+
+    console.log(infoUser);
+
     return(
         <Container>
             <div>
-                <h1>Olá, Fulano</h1>
+                <h1>Olá, {infoUser.name}</h1>
                 <img src={logoutIcon}/>
             </div>
-            <AreaFinancas>
-                <p>Não há registros de entrada ou saída</p>
-            </AreaFinancas>
+            <AreaFinancas/>
             <div>
                 <BotaoInferior>
                     <img src={plusIcon}/>
@@ -88,10 +102,10 @@ const BotaoInferior = styled.div`
         color: #FFFFFF;
     }
 `
-const AreaFinancas = styled.div`
+/*const AreaFinancas = styled.div`
     height: 100%;
     width: 326px;
     background: #FFFFFF;
     border-radius: 5px;
     width: 100%; 
-`
+`*/
