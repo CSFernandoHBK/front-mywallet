@@ -1,16 +1,38 @@
+import axios from "axios";
 import { useState } from "react"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components"
+import { urlAPI } from "../../constants/URLs";
 
 export default function NewOutPage() {
     const [valor, setValor] = useState()
     const [descricao, setDescricao] = useState();
     const [disabled, setDisabled] = useState(false);
+    const token = JSON.parse(localStorage.getItem("token"));
+    const navigate = useNavigate();
+
+    function submitNewMovement(event){
+        event.preventDefault();
+        setDisabled(true);
+
+        const date = new Date();
+        const data = `${date.getDate()}/${date.getMonth()+1}`;
+
+        const requisicao = axios.post(`${urlAPI}newmovement`, {
+            "date": data,
+            "description": descricao,
+            "value": String(valor),
+            "type": "out"
+        }, {headers: {
+            "Authorization": `Bearer ${token}`
+        }})
+        requisicao.then((r) => {console.log(r);navigate("/home")})
+    }
 
     return(
         <Container>
             <h1>Nova saída</h1>
-            <form>
+            <form onSubmit={submitNewMovement}>
                 <input type="number" 
                 value={valor} 
                 onChange={(e) => setValor(e.target.value)} 
@@ -23,7 +45,7 @@ export default function NewOutPage() {
                 placeholder="Descrição" 
                 disabled={disabled} 
                 required />
-                <button>Salvar saída</button>
+                <button type="submit">Salvar saída</button>
             </form>
             <Link to="/home">
                 <button>Cancelar</button>
