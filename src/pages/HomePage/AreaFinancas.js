@@ -15,8 +15,6 @@ export default function AreaFinancas() {
 
     }, [])
 
-    console.log(movements);
-
     if(!movements){
         return(
             <Container>
@@ -26,7 +24,6 @@ export default function AreaFinancas() {
     }
 
     if(movements.length === 0){
-        console.log("entrou aqui")
         return(
             <Container>
                 <p>Não há registros de entrada ou saída</p>
@@ -76,6 +73,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow: scroll; 
 
     p{
         font-family: 'Raleway';

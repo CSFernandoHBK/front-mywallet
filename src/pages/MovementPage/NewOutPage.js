@@ -52,10 +52,8 @@ export default function NewOutPage() {
                 disabled={disabled} 
                 required />
                 <button type="submit">Salvar saída</button>
+                <BotaoCancelar onClick={() => navigate("/home")}>Cancelar</BotaoCancelar>
             </form>
-            <Link to="/home">
-                <button>Cancelar</button>
-            </Link>
         </Container>
     )
 }
@@ -71,7 +69,7 @@ const Container = styled.div`
     align-items: flex-start;
 
     h1{
-        font-family: 'Raleway', sans-serif;
+        font-family: 'Raleway';
         font-style: normal;
         font-weight: 700;
         font-size: 26px;
@@ -82,7 +80,7 @@ const Container = styled.div`
     form{
         display: flex;
         flex-direction: column;
-        height: 188px;
+        height: 240px;
         justify-content: space-between;
         margin-bottom: 36px;
         margin-top: 24px;
@@ -108,7 +106,7 @@ const Container = styled.div`
             }
         }
 
-        button{
+        & > button:nth-child(3){
             background: #A328D6;
             border-radius: 5px;
             height: 48px;
@@ -128,4 +126,14 @@ const Container = styled.div`
         line-height: 18px;
         color: #FFFFFF;
     }
+`
+const BotaoCancelar = styled.button`
+    background: #B2F5E3;
+    border-radius: 5px;
+    height: 48px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    color: #A328D6;
 `

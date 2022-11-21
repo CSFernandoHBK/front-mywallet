@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components"
 import { urlAPI } from "../../constants/URLs";
 
@@ -52,6 +52,7 @@ export default function NewInPage() {
                 disabled={disabled} 
                 required />
                 <button type="submit">Salvar entrada</button>
+                <BotaoCancelar onClick={() => navigate("/home")}>Cancelar</BotaoCancelar>
             </form>
         </Container>
     )
@@ -79,7 +80,7 @@ const Container = styled.div`
     form{
         display: flex;
         flex-direction: column;
-        height: 188px;
+        height: 240px;
         justify-content: space-between;
         margin-bottom: 36px;
         margin-top: 24px;
@@ -105,7 +106,7 @@ const Container = styled.div`
             }
         }
 
-        button{
+        & > button:nth-child(3){
             background: #A328D6;
             border-radius: 5px;
             height: 48px;
@@ -125,4 +126,14 @@ const Container = styled.div`
         line-height: 18px;
         color: #FFFFFF;
     }
+`
+const BotaoCancelar = styled.button`
+    background: #B2F5E3;
+    border-radius: 5px;
+    height: 48px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    color: #A328D6;
 `
