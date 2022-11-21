@@ -116,10 +116,3 @@ const BotaoInferior = styled.div`
         color: #FFFFFF;
     }
 `
-/*const AreaFinancas = styled.div`
-    height: 100%;
-    width: 326px;
-    background: #FFFFFF;
-    border-radius: 5px;
-    width: 100%; 
-`*/

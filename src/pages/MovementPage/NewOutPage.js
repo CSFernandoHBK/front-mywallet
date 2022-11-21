@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link } from "react-router-dom";
 import styled from "styled-components"
 
 export default function NewOutPage() {
@@ -24,6 +25,9 @@ export default function NewOutPage() {
                 required />
                 <button>Salvar saída</button>
             </form>
+            <Link to="/home">
+                <button>Cancelar</button>
+            </Link>
         </Container>
     )
 }
