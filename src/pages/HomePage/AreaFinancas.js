@@ -1,55 +1,27 @@
 import axios from "axios"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import styled from "styled-components"
 import { urlAPI } from "../../constants/URLs";
 
 export default function AreaFinancas() {
     const token = JSON.parse(localStorage.getItem("token"));
+    const [movements, setMovements] = useState();
 
-    const movements = [
-    {
-        "idUser": "6378c1636e84114a40f76a46",
-        "date" : "20/11",
-        "description" : "conta do mercado",
-        "value" : "90.35",
-        "type" : "in"
-    },
-    {
-        "idUser": "6378c1636e84114a40f76a46",
-        "date" : "20/11",
-        "description" : "caixa de som",
-        "value" : "5.25",
-        "type" : "out"
-    },
-    {
-        "idUser": "6378c1636e84114a40f76a46",
-        "date" : "20/11",
-        "description" : "conta do mercado",
-        "value" : "90.35",
-        "type" : "in"
-    },
-    {
-        "idUser": "6378c1636e84114a40f76a46",
-        "date" : "20/11",
-        "description" : "caixa de som",
-        "value" : "5.25",
-        "type" : "out"
-    },
-    {
-        "idUser": "6378c1636e84114a40f76a46",
-        "date" : "20/11",
-        "description" : "conta do mercado",
-        "value" : "1000",
-        "type" : "in"
-    },
-    {
-        "idUser": "6378c1636e84114a40f76a46",
-        "date" : "20/11",
-        "description" : "caixa de som",
-        "value" : "205.25",
-        "type" : "out"
-    }]   
+    useEffect(() => {
+        const requisicao = axios.get(`${urlAPI}movements`,
+        {headers: {"Authorization": `Bearer ${token}`}})
+        requisicao.then((res) => setMovements(res.data));
 
+    }, [])
+
+    if(!movements){
+        return(
+            <Container>
+                <p>Carregando...</p>
+            </Container>
+        )
+    }
+    
     function calcularSaldo(){
         let saldo = 0;
         movements.map((m) => {
@@ -61,7 +33,6 @@ export default function AreaFinancas() {
         })
         return(saldo);
     }
-
     const saldo = calcularSaldo();
 
     return(
@@ -89,7 +60,7 @@ const Container = styled.div`
     background: #FFFFFF;
     border-radius: 5px;
     width: 100%; 
-    padding: 23px 12px 23px;
+    padding: 23px 12px 30px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
