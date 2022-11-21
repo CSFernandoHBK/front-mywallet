@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { json, Link, useNavigate } from "react-router-dom";
 import styled from "styled-components"
 import { urlAPI } from "../../constants/URLs";
@@ -9,6 +9,14 @@ export default function LoginPage() {
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
     const [disabled, setDisabled] = useState(false);
+    const token = JSON.parse(localStorage.getItem("token"));
+
+    useEffect(() => {
+      if(token){
+        navigate("/home")
+      }
+    }, [])
+    
 
     function sendLogin(event){
         event.preventDefault();

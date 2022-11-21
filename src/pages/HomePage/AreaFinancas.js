@@ -6,6 +6,7 @@ import { urlAPI } from "../../constants/URLs";
 export default function AreaFinancas() {
     const token = JSON.parse(localStorage.getItem("token"));
     const [movements, setMovements] = useState();
+    const [hasMovements, setHasMovements] = useState(true);
 
     useEffect(() => {
         const requisicao = axios.get(`${urlAPI}movements`,
@@ -14,10 +15,21 @@ export default function AreaFinancas() {
 
     }, [])
 
+    console.log(movements);
+
     if(!movements){
         return(
             <Container>
                 <p>Carregando...</p>
+            </Container>
+        )
+    }
+
+    if(movements.length === 0){
+        console.log("entrou aqui")
+        return(
+            <Container>
+                <p>Não há registros de entrada ou saída</p>
             </Container>
         )
     }
@@ -64,6 +76,14 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
+    p{
+        font-family: 'Raleway';
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 23px;
+        color: #868686;
+    }
 `
 const ItemLista = styled.div`
     font-family: 'Raleway';

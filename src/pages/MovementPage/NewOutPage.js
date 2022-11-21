@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components"
 import { urlAPI } from "../../constants/URLs";
@@ -10,6 +10,12 @@ export default function NewOutPage() {
     const [disabled, setDisabled] = useState(false);
     const token = JSON.parse(localStorage.getItem("token"));
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if(!token){
+          navigate("/");
+        }
+      }, [])
 
     function submitNewMovement(event){
         event.preventDefault();

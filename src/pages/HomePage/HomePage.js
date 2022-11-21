@@ -15,6 +15,13 @@ export default function HomePage() {
     const navigate = useNavigate();
 
     useEffect(() => {
+      if(!token){
+        navigate("/");
+      }
+    }, [])
+    
+
+    useEffect(() => {
         const requisicao = axios.get(`${urlAPI}home`, 
         {headers: {
             "Authorization": `Bearer ${token}`
@@ -30,13 +37,21 @@ export default function HomePage() {
         )
     }
 
-    console.log(infoUser);
+    function logout(){
+        const requisicao = axios.delete(`${urlAPI}logout`,
+        {headers: {
+            "Authorization": `Bearer ${token}`
+        }});
+        localStorage.removeItem("token");
+        alert("Logout com sucesso!")
+        navigate("/");
+    }
 
     return(
         <Container>
             <div>
                 <h1>Olá, {infoUser.name}</h1>
-                <img src={logoutIcon}/>
+                <img src={logoutIcon} onClick={() => logout()}/>
             </div>
             <AreaFinancas/>
             <div>
