@@ -119,5 +119,10 @@ const Container = styled.div`
         font-size: 15px;
         line-height: 18px;
         color: #FFFFFF;
+        text-decoration: none;
+    }
+
+    a{
+        text-decoration: none;
     }
 `

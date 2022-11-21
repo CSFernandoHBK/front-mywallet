@@ -83,6 +83,10 @@ const Container = styled.div`
     align-items: center;
     padding: 25px;
 
+    a{
+        text-decoration: none;
+    }
+
     & > div:nth-child(1){
         display: flex;
         width: 100%;
